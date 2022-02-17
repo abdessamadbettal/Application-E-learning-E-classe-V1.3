@@ -1,6 +1,8 @@
 <?php
-// session_start();
-// if (isset($_SESSION['email'])) {
+if (empty($_SESSION['username'])) {
+
+  header('location: index.php');
+} else {
 ?>
   <?php
   include_once 'db.php';
@@ -14,13 +16,10 @@
   $titre_page = 'home';
   require 'header.php';
   ?>
-
-
   <div class="container-fluid">
     <div class="row flex-nowrap">
       <?php
       include 'sidebar.php';
-
       ?>
     </div>
     <!-- nav bar -->
@@ -39,10 +38,8 @@
                   <p class="fs-2 fw-5 h3 "><?php echo $data_s[0]; ?></p>
                 </div>
               </div>
-
             </div>
           </div>
-
           <div class="col-md-6 col-lg-3">
             <div class=" p-3  shadow-sm rounded" style="background-color: #FEF6FB;">
               <div>
@@ -52,10 +49,8 @@
                   <p class="fs-2 h3 fw-5 ">13</p>
                 </div>
               </div>
-
             </div>
           </div>
-
           <div class="col-md-6 col-lg-3">
             <div class=" p-3 shadow-sm rounded payments-c" style="background-color: #FEFBEC;">
               <div>
@@ -68,10 +63,8 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
-
           <div class="col-md-6 col-lg-3">
             <div class=" p-3 shadow-sm rounded" style=" background: linear-gradient(110.42deg, #00C1FE 18.27%, #FAFFC1 91.84%);">
               <div>
@@ -81,20 +74,15 @@
                   <p class="fs-2 fw-5 h3 ">3</p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
-
       </div>
-
-
     </div>
   </div>
   </div>
 <?php
-// } else {
-//   header('location: index.php');
-// }
+
+}
 require 'footer.php';
 ?>
