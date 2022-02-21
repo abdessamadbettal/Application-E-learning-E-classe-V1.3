@@ -3,37 +3,30 @@ session_start();
 include_once 'db.php';
 $query = "SELECT * FROM `comptes`  ";
 $resultat = mysqli_query($connecter, $query);
-$error = "" ;
-$success = "" ;
-$i =0 ;
-while ($row = mysqli_fetch_assoc($resultat) ) {
+$i = 0;
+while ($row = mysqli_fetch_assoc($resultat)) {
   if (isset($_POST['submit'])) {
-    $email = $_POST['email'] ;
-  $password = $_POST['password'] ;  
-  if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    if (isset($_POST['submit'])) {
       if ($email == $row['email']) {
-          if ($password == $row['passeword']) {
-            $_SESSION['username'] = $row['username'] ;
-            if (isset($_POST['check'])) {
-              setcookie('email', $email , time() + 60 * 60 * 24 );
-              setcookie('password', $password , time() + 60 * 60 * 24 );
-            }
-             header('location:dash.php');
-              // $success = "welcome admin !!!" ;
+        if ($password == $row['passeword']) {
+
+          if (isset($_POST['check'])) {
+            setcookie('email', $email, time() + 60 * 60 * 24);
+            setcookie('password', $password, time() + 60 * 60 * 24);
           }
-          else {
-            $rr = "";
-              $error = "invalid password !!!";
-          }
+          header('location:dash.php');
+          $_SESSION['username'] = $row['username'];
+        } else {
+          $error = "invalid password !!!";
+        }
+      } else {
+        $error = "invlid password and email ";
       }
-      else {
-        $rr = "";
-          $error = "invlid password and email !!!!!!";
-          // $success = "welcome admin !!!!!";
-      } 
+    }
   }
-  }
-  $i++ ;
+  $i++;
 }
 $titre_page = 'Sign-in';
 require 'header.php';
@@ -48,21 +41,26 @@ require 'header.php';
               <h1 class="border-start border-5 border- border-primary d-flex justify-content-start " id="font1">E-classe</h1>
               <h3>Sign in</h3>
               <h6>enter your credentials to access your account</h6>
-              <?php if (isset ($rr)) { echo '<p class="alert alert-danger">' . $error . '</p>'; }  ?>
+              <?php if (isset($error)) {
+                echo '<p class="alert alert-danger">' . $error . '</p>';
+              }  ?>
               <div class="form-outline mb-4">
                 <label class="form-label d-flex justify-content-start " for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php if(isset($_COOKIE['email'])){ echo $_COOKIE['email'];} ?>" class="form-control form-control-lg" placeholder="enter your email" />
+                <input type="email" id="email" name="email" value="<?php if (isset($_COOKIE['email'])) {
+                                                                      echo $_COOKIE['email'];
+                                                                    } ?>" class="form-control form-control-lg" placeholder="enter your email" />
               </div>
               <div class="form-outline mb-4">
                 <label class="form-label d-flex justify-content-start " for="password">Password</label>
-                <input type="password" name="password" id="password" value="<?php if(isset($_COOKIE['password'])){ echo $_COOKIE['password'];} ?>" class="form-control form-control-lg" placeholder="enter your password" />
+                <input type="password" name="password" id="password" value="<?php if (isset($_COOKIE['password'])) {
+                                                                              echo $_COOKIE['password'];
+                                                                            } ?>" class="form-control form-control-lg" placeholder="enter your password" />
               </div>
               <div class="form-check d-flex justify-content-start mb-4">
                 <input class="form-check-input" type="checkbox" value="" name="check" id="check" />
                 <label class="form-check-label" for="check"> Remember password </label>
               </div>
               <button class="btn btn-primary btn-lg btn-block w-100 border-1 rounded-3" name="submit" type="submit">SIGN IN</button>
-              <!-- <a href="dash.php"><button class="btn btn-primary btn-lg btn-block w-100 border-1 rounded-3" type="submit">SIGN IN</button></a> -->
               <h6>Forfot your password? <a href="#"><span class="text-primary text-decoration-underline">Reset Password</span></a></h6>
             </div>
           </form>

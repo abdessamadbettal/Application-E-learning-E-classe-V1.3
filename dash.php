@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 if (empty($_SESSION['username'])) {
 
   header('location: index.php');
@@ -19,6 +22,7 @@ if (empty($_SESSION['username'])) {
   <div class="container-fluid">
     <div class="row flex-nowrap">
       <?php
+      $active_d = 'active px-3';
       include 'sidebar.php';
       ?>
     </div>

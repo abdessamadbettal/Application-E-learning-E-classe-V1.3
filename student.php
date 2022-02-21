@@ -1,5 +1,8 @@
 <?php
-if (empty($_SESSION['username'])) {
+session_start();
+?>
+<?php
+if (!isset($_SESSION['username'])) {
   header('location: index.php');
 } else {
   $titre_page = 'student';
@@ -8,6 +11,7 @@ if (empty($_SESSION['username'])) {
   <div class="container-fluid">
     <div class="row flex-nowrap">
       <?php
+      $active_s = ' active px-3';
       include 'sidebar.php';
       ?>
     </div>
@@ -16,7 +20,7 @@ if (empty($_SESSION['username'])) {
       <?php
       include 'navbar.php';
       ?>
-      <div class="">
+      <div class="col">
         <div class="d-flex justify-content-between">
           <h2 class="fw-bold">students lists</h2>
           <div>
@@ -51,7 +55,7 @@ if (empty($_SESSION['username'])) {
                 <td class="text-black py-4">' . $row['phone'] . '</td>
                 <td class="text-black py-4">' . $row['enroll'] . '</td>
                 <td class="text-black py-4">' . $row['date'] . '</td>
-                <td class="py-4 d-flex justify-content-evenly"><a href="./crud-mysql/edit.php?enroll=' . $row['enroll'] . ' "  > <i class="bi bi-pen" id="text-ciel"></i></a><a href="./crud-mysql/delet.php?enroll=' . $row['enroll'] . ' "  ><i class="bi bi-trash " id="text-ciel"></i></a></td>
+                <td class="py-4 d-flex justify-content-evenly"><a href="./crud-mysql/edit.php?id=' . $row['id'] . ' "  > <i class="bi bi-pen" id="text-ciel"></i></a><a href="./crud-mysql/delet.php?id=' . $row['id'] . ' "  ><i class="bi bi-trash " id="text-ciel"></i></a></td>
 
               </tr>
               <tr>

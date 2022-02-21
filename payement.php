@@ -1,5 +1,8 @@
 <?php
-if (empty($_SESSION['username'])) {
+session_start();
+?>
+<?php
+if (!isset($_SESSION['username'])) {
   header('location: index.php');
 } else {
   $titre_page = 'payement';
@@ -8,6 +11,7 @@ if (empty($_SESSION['username'])) {
   <div class="container-fluid">
     <div class="row flex-nowrap">
       <?php
+      $active_p = ' active px-3';
       include 'sidebar.php';
       ?>
     </div>

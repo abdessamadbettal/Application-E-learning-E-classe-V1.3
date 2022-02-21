@@ -1,4 +1,4 @@
-<nav class="d-flex justify-content-end">
+<nav class="container d-flex justify-content-end">
     <div class="d-flex">
         <form class="d-flex input-group ">
             <div class="  d-flex align-items-center  rounded border   d-flex" style="border :2px solid black">
