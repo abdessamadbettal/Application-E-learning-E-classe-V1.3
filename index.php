@@ -1,33 +1,54 @@
 <?php
 session_start();
 include_once 'db.php';
-$query = "SELECT * FROM `comptes`  ";
-$resultat = mysqli_query($connecter, $query);
-$i = 0;
-while ($row = mysqli_fetch_assoc($resultat)) {
-  if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    if (isset($_POST['submit'])) {
-      if ($email == $row['email']) {
-        if ($password == $row['passeword']) {
 
-          if (isset($_POST['check'])) {
-            setcookie('email', $email, time() + 60 * 60 * 24);
-            setcookie('password', $password, time() + 60 * 60 * 24);
-          }
-          header('location:dash.php');
-          $_SESSION['username'] = $row['username'];
-        } else {
-          $error = "invalid password !!!";
-        }
-      } else {
-        $error = "invlid password and email ";
-      }
+
+if (isset($_POST['submit'])){
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  $query = "SELECT * FROM `comptes` WHERE email='$email' AND passeword='$password' ";
+  $resultat = mysqli_query($connecter, $query);
+  $row = mysqli_fetch_assoc($resultat) ;
+  $count = mysqli_num_rows($resultat) ;
+  if ($count == 1) {
+  
+  // if ($email == $row['email'] && $password == $row['passeword']) {
+    if (isset($_POST['check'])) {
+      setcookie('email', $email, time() + 60 * 60 * 24);
+      setcookie('password', $password, time() + 60 * 60 * 24);
     }
+    header('location:dash.php');
+    $_SESSION['username'] = $row['username'];
   }
-  $i++;
+  //  } 
+   else {
+      $error = "invlid password or email ";
+    }
 }
+// while ($row = mysqli_fetch_assoc($resultat)) {
+
+//   if (isset($_POST['submit'])) {
+//     $email = $_POST['email'];
+//     $password = $_POST['password'];
+//     if (isset($_POST['submit'])) {
+      // if ($email == $row['email']) {
+      //   if ($password == $row['passeword']) {
+      //     if (isset($_POST['check'])) {
+      //       setcookie('email', $email, time() + 60 * 60 * 24);
+      //       setcookie('password', $password, time() + 60 * 60 * 24);
+      //     }
+      //     header('location:dash.php');
+      //     $_SESSION['username'] = $row['username'];
+      //   } else {
+      //     $error = "invlid password or email ";
+      //   }
+      // } else {
+      //   $error = "invlid password or email ";
+      // }
+//     }
+//   }
+//   // $i++;
+// }
 $titre_page = 'Sign-in';
 require 'header.php';
 ?>
@@ -46,7 +67,7 @@ require 'header.php';
               }  ?>
               <div class="form-outline mb-4">
                 <label class="form-label d-flex justify-content-start " for="email">Email</label>
-                <input type="email" id="email" name="email" value="<?php if (isset($_COOKIE['email'])) {
+                <input type="email" id="email" name="email" value="<?php  if (isset($_COOKIE['email'])) {
                                                                       echo $_COOKIE['email'];
                                                                     } ?>" class="form-control form-control-lg" placeholder="enter your email" />
               </div>

@@ -43,8 +43,11 @@ if (!isset($_SESSION['username'])) {
                             $query = "SELECT * FROM `courses`  ";
                             $resultat = mysqli_query($connecter, $query);
                             if (mysqli_num_rows($resultat) > 0) {
-                                $i = 0;
-                                while ($row = mysqli_fetch_assoc($resultat)) {
+                                // $i = 0;
+                                // while ($row = mysqli_fetch_assoc($resultat)) {
+                                    foreach ($resultat as $row ) {
+                                        # code...
+                                    // }
                                     echo '<tr class="">
                 <td class="text-black "> <img src="img/username.png" alt=""></td>
                 <td class="text-black py-4">' . $row['name'] . '</td>
@@ -63,7 +66,7 @@ if (!isset($_SESSION['username'])) {
                 <td class="p-1"></td>
               </tr>
               ';
-                                    $i++;
+                                    // $i++;
                                 }
                             } else {
                                 echo 'no result found';

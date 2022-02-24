@@ -48,6 +48,7 @@ if (!isset($_SESSION['username'])) {
               require_once 'db.php';
               $query = "SELECT * FROM `payments` ";
               $resultat = mysqli_query($connecter, $query);
+              
               if (mysqli_num_rows($resultat) > 0) {
                 $i = 0;
                 while ($row = mysqli_fetch_row($resultat)) {

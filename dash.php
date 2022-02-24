@@ -10,10 +10,13 @@ if (empty($_SESSION['username'])) {
   <?php
   include_once 'db.php';
   $count_s = "SELECT COUNT(id) FROM students;";
+  $count_d = "SELECT COUNT(id) FROM courses;";
   $count_p = "SELECT SUM(amount) FROM payments;";
   $resultat_s = mysqli_query($connecter, $count_s);
+  $resultat_d = mysqli_query($connecter, $count_d);
   $resultat_p = mysqli_query($connecter, $count_p);
   $data_s = mysqli_fetch_row($resultat_s);
+  $data_d = mysqli_fetch_row($resultat_d);
   $data_p = mysqli_fetch_column($resultat_p);
 
   $titre_page = 'home';
@@ -50,7 +53,7 @@ if (empty($_SESSION['username'])) {
                 <i class="bi bi-bookmark fs-1  p-3 " style="color: #EE95C5;"></i>
                 <p class="fs-5 mt-2 text-secondary">Course</p>
                 <div class="d-flex justify-content-end">
-                  <p class="fs-2 h3 fw-5 ">13</p>
+                  <p class="fs-2 h3 fw-5 "><?php echo $data_d[0]; ?></p>
                 </div>
               </div>
             </div>
@@ -75,7 +78,7 @@ if (empty($_SESSION['username'])) {
                 <i class="bi bi-person fs-1  p-3 text-white "></i>
                 <p class="fs-5 mt-2 text-secondary">Users</p>
                 <div class="d-flex justify-content-end">
-                  <p class="fs-2 fw-5 h3 ">3</p>
+                  <p class="fs-2 fw-5 h3 ">2</p>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@
                 <div class="modal-body">
 
 
-                    <form method="POST">
+                    <form method="POST" action="">
                         <div class="form-outline mb-4">
                             <label class="form-label">Name</label>
                             <input type="text" class="form-control" name="name" />

@@ -27,7 +27,7 @@ include './footre.php';
 <body>
     <div class="container">
         <a href="/student.php" class="my-4 btn btn-primary btn-create p-2">BACk</a>
-        <form method="POST">
+        <form method="POST" action="">
             <div class="form-outline mb-4">
                 <label class="form-label">Name</label>
                 <input type="text" class="form-control" name="Name" value="<?php echo $name ?>" />
